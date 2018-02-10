@@ -15,7 +15,7 @@ declare(strict_types = 1);
 namespace Modules\Help\Admin;
 
 use phpOMS\DataStorage\Database\DatabasePool;
-use phpOMS\Module\UninstallAbstract;
+use phpOMS\Module\UninstallerAbstract;
 use phpOMS\Module\InfoManager;
 
 /**
@@ -26,14 +26,7 @@ use phpOMS\Module\InfoManager;
  * @link       http://website.orange-management.de
  * @since      1.0.0
  */
-class Uninstall extends UninstallAbstract
+class Uninstaller extends UninstallerAbstract
 {
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function uninstall(DatabasePool $dbPool, InfoManager $info)
-    {
-        parent::uninstall($dbPool, $info);
-    }
 }

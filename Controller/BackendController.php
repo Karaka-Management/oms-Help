@@ -28,7 +28,8 @@ use phpOMS\Views\View;
  * @link    https://orange-management.org
  * @since   1.0.0
  *
- * @todo Orange-Management/Modules#200
+ * @todo Orange-Management/oms-Help#1
+ *  Add dev help documentation
  *  Currently only the end-user help documentation is shown in the modules.
  *  Implement the help documentation for developers as well.
  */

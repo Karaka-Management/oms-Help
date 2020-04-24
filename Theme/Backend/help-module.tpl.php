@@ -17,5 +17,13 @@
                 <?= $this->getData('navigation'); ?>
             </article>
         </section>
+
+        <?php if ($this->hasData('devNavigation')) : ?>
+        <section class="box wf-100">
+            <article>
+                <?= $this->getData('devNavigation'); ?>
+            </article>
+        </section>
+        <?php endif; ?>
     </div>
 </div>

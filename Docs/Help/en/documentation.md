@@ -9,9 +9,9 @@ Mandatory files are a `SUMMARY.md` file which contains the list of all documents
 ```md
 # Table of Contents
 
-* [Link Name 1]({%}&page=document_name_1)
-* [Link Name 2]({%}&page=document_name_2)
-* [Link Name 3]({%}&page=document_name_3)
+* [Link Name 1]({%}&page=Help/document_name_1)
+* [Link Name 2]({%}&page=Help/document_name_2)
+* [Link Name 3]({%}&page=Help/document_name_3)
 ```
 
 ![Directory Structure](Modules/Help/Docs/Help/img/directory_structure.png)

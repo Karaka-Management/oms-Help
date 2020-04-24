@@ -1,3 +1,3 @@
-# Table of Contents
+# User Content
 
-* [Documentation]({%}&page=documentation)
+* [Documentation]({%}&page=Help/documentation)

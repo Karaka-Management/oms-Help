@@ -155,13 +155,16 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
         $path = $this->getHelpModulePath($request);
 
+        $summaryPath    = __DIR__ . '/../../' . $request->getData('id') . '/Docs/Help/en/SUMMARY.md';
+        $devSummaryPath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/Dev/en/SUMMARY.md';
+
         $toParse    = \file_get_contents($path);
-        $summary    = \file_get_contents(__DIR__ . '/../../' . $request->getData('id') . '/Docs/Help/en/SUMMARY.md');
-        $devSummary = \file_get_contents(__DIR__ . '/../../' . $request->getData('id') . '/Docs/Dev/en/SUMMARY.md');
+        $summary    = \file_exists($summaryPath) ? \file_get_contents($summaryPath) : '';
+        $devSummary = \file_exists($devSummaryPath) ? \file_get_contents($devSummaryPath) : '';
 
         $content       = Markdown::parse($toParse === false ? '' : $toParse);
         $navigation    = Markdown::parse($summary === false ? '' : $summary);
-        $devNavigation = $devSummary === false ? null : Markdown::parse($devSummary);
+        $devNavigation = empty($devSummary) ? null : Markdown::parse($devSummary);
 
         $view->setTemplate('/Modules/Help/Theme/Backend/help-module');
         $view->setData('content', $content);
@@ -183,7 +186,7 @@ final class BackendController extends Controller
      */
     private function getHelpModulePath(RequestAbstract $request) : string
     {
-        $type = '';
+        $type = 'Help';
         if ($request->getData('page') === 'table-of-contencts' || $request->getData('page') === null) {
             $page = 'introduction';
         } else {
@@ -192,9 +195,10 @@ final class BackendController extends Controller
             $type    = \substr($request->getData('page'), 0, $typePos);
         }
 
-        $path = \realpath(__DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->getHeader()->getL11n()->getLanguage() . '/' . $page . '.md');
+        $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->getHeader()->getL11n()->getLanguage();
+        $path     = \realpath($basePath . '/' . $page . '.md');
         if ($path === false) {
-            $path = \realpath(__DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->getHeader()->getL11n()->getLanguage() . '/introduction.md');
+            $path = \realpath($basePath . '/introduction.md');
         }
 
         return $path === false ? '' : $path;

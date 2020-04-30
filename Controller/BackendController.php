@@ -191,6 +191,7 @@ final class BackendController extends Controller
             $page = 'introduction';
         } else {
             $typePos = \stripos($request->getData('page'), '/');
+            $typePos = $typePos === false ? -1 : $typePos;
             $page    = \substr($request->getData('page'), $typePos + 1);
             $type    = \substr($request->getData('page'), 0, $typePos);
         }

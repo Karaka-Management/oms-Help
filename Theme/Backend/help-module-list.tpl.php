@@ -41,7 +41,7 @@ $modules = $this->getData('modules');
                         ['$module' => $module->getInternalName()]
                     );
                 ?>
-                    <tr data-href="<?= $url; ?>">
+                    <tr tabindex="0" data-href="<?= $url; ?>">
                         <td data-label="<?= $this->getHtml('Name') ?>"><a href="<?= $url; ?>"><?= $this->printHtml($module->getExternalName()); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>

@@ -12,11 +12,16 @@
  */
 declare(strict_types=1);
 
+use phpOMS\Uri\UriFactory;
+
 /**
- * @var \phpOMS\Views\View          $this
+ * @var \phpOMS\Views\View $this
  * @var \phpOMS\Module\ModuleInfo[] $modules
  */
 $modules = $this->getData('modules');
+
+$previous = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \reset($modules)->getId() . '&ptype=-';
+$next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \end($modules)->getId() . '&ptype=+';
 ?>
 
 <div class="row">
@@ -36,7 +41,7 @@ $modules = $this->getData('modules');
                     }
 
                     ++$count;
-                    $url = \phpOMS\Uri\UriFactory::build(
+                    $url = UriFactory::build(
                         '{/lang}/backend/help/module/single?id={$module}',
                         ['$module' => $module->getInternalName()]
                     );
@@ -48,7 +53,10 @@ $modules = $this->getData('modules');
                     <tr><td class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
                 <?php endif; ?>
             </table>
-            <div class="portlet-foot"></div>
+            <div class="portlet-foot">
+                <a class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
+                <a class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
+            </div>
         </div>
     </div>
 </div>

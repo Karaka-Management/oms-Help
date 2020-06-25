@@ -158,7 +158,7 @@ final class BackendController extends Controller
         $summaryPath    = __DIR__ . '/../../' . $request->getData('id') . '/Docs/Help/en/SUMMARY.md';
         $devSummaryPath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/Dev/en/SUMMARY.md';
 
-        $toParse    = \file_get_contents($path);
+        $toParse    = $path === '' ? '' : \file_get_contents($path);
         $summary    = \file_exists($summaryPath) ? \file_get_contents($summaryPath) : '';
         $devSummary = \file_exists($devSummaryPath) ? \file_get_contents($devSummaryPath) : '';
 
@@ -190,14 +190,26 @@ final class BackendController extends Controller
         if ($request->getData('page') === 'table-of-contencts' || $request->getData('page') === null) {
             $page = 'introduction';
         } else {
-            $typePos = \stripos($request->getData('page'), '/');
+            $decoded = \urldecode($request->getData('page'));
+            $typePos = \stripos($decoded, '/');
             $typePos = $typePos === false ? -1 : $typePos;
-            $page    = \substr($request->getData('page'), $typePos + 1);
-            $type    = \substr($request->getData('page'), 0, $typePos);
+            $page    = \substr($decoded, $typePos + 1);
+            $type    = \substr($decoded, 0, $typePos);
         }
 
         $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->getHeader()->getL11n()->getLanguage();
         $path     = \realpath($basePath . '/' . $page . '.md');
+
+        if ($path === false) {
+            $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $this->app->l11nServer->getLanguage();
+            $path     = \realpath($basePath . '/' . $page . '.md');
+        }
+
+        if ($path === false) {
+            $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/en';
+            $path     = \realpath($basePath . '/' . $page . '.md');
+        }
+
         if ($path === false) {
             $path = \realpath($basePath . '/introduction.md');
         }

@@ -20,8 +20,8 @@ use phpOMS\Uri\UriFactory;
  */
 $modules = $this->getData('modules');
 
-$previous = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \reset($modules)->getId() . '&ptype=-';
-$next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \end($modules)->getId() . '&ptype=+';
+$previous = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \reset($modules)->getId() . '&ptype=p';
+$next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \end($modules)->getId() . '&ptype=n';
 ?>
 
 <div class="row">

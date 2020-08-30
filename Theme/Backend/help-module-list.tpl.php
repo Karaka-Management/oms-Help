@@ -27,11 +27,11 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
 <div class="row">
     <div class="col-xs-12">
         <div class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Modules') ?><i class="fa fa-download floatRight download btn"></i></div>
+            <div class="portlet-head"><?= $this->getHtml('Modules'); ?><i class="fa fa-download floatRight download btn"></i></div>
             <table id="moduleList" class="default">
                 <thead>
                 <tr>
-                    <td class="wf-100"><?= $this->getHtml('Name') ?><i class="sort-asc fa fa-chevron-up"></i><i class="sort-desc fa fa-chevron-down"></i>
+                    <td class="wf-100"><?= $this->getHtml('Name'); ?><i class="sort-asc fa fa-chevron-up"></i><i class="sort-desc fa fa-chevron-down"></i>
                 <tbody>
                 <?php
                 $count = 0;
@@ -47,7 +47,7 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
                     );
                 ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
-                        <td data-label="<?= $this->getHtml('Name') ?>"><a href="<?= $url; ?>"><?= $this->printHtml($module->getExternalName()); ?></a>
+                        <td data-label="<?= $this->getHtml('Name'); ?>"><a href="<?= $url; ?>"><?= $this->printHtml($module->getExternalName()); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
                     <tr><td class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>

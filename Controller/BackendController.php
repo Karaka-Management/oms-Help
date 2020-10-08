@@ -159,8 +159,8 @@ final class BackendController extends Controller
         $devSummaryPath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/Dev/en/SUMMARY.md';
 
         $toParse    = $path === '' ? '' : \file_get_contents($path);
-        $summary    = \file_exists($summaryPath) ? \file_get_contents($summaryPath) : '';
-        $devSummary = \file_exists($devSummaryPath) ? \file_get_contents($devSummaryPath) : '';
+        $summary    = \is_file($summaryPath) ? \file_get_contents($summaryPath) : '';
+        $devSummary = \is_file($devSummaryPath) ? \file_get_contents($devSummaryPath) : '';
 
         $content       = Markdown::parse($toParse === false ? '' : $toParse);
         $navigation    = Markdown::parse($summary === false ? '' : $summary);

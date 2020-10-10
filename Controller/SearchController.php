@@ -61,7 +61,7 @@ final class SearchController extends Controller
             ) + 1
         );
 
-        $files = [];
+        $files         = [];
         $activeModules = $this->app->moduleManager->getActiveModules();
 
         foreach ($activeModules as $module) {
@@ -102,17 +102,17 @@ final class SearchController extends Controller
                     );
 
                     $files[$module['name']['internal']][] = [
-                        'title' => $module['name']['external'] . ': ' . \trim($headline, " #\r\n\t"),
-                        'summary' => \trim($summary, " #\r\n\t"),
-                        'link' => $path . '/' . $file,
-                        'account' => '',
+                        'title'     => $module['name']['external'] . ': ' . \trim($headline, " #\r\n\t"),
+                        'summary'   => \trim($summary, " #\r\n\t"),
+                        'link'      => $path . '/' . $file,
+                        'account'   => '',
                         'createdAt' => \max(
                             \filectime($path . '/' . $file),
                             \filemtime($path . '/' . $file)
                         ),
                         'image' => '',
-                        'tags' => [],
-                        'type' => 'list_links'
+                        'tags'  => [],
+                        'type'  => 'list_links',
                     ];
                     // @todo: add match score for sorted return
                 }

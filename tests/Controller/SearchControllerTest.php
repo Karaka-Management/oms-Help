@@ -22,13 +22,13 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Application\ApplicationAbstract;
 use phpOMS\Dispatcher\Dispatcher;
 use phpOMS\Event\EventManager;
+use phpOMS\Message\Http\HttpRequest;
+use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Module\ModuleAbstract;
 use phpOMS\Module\ModuleManager;
 use phpOMS\Router\WebRouter;
-use phpOMS\Utils\TestUtils;
-use phpOMS\Message\Http\HttpResponse;
-use phpOMS\Message\Http\HttpRequest;
 use phpOMS\Uri\HttpUri;
+use phpOMS\Utils\TestUtils;
 
 /**
  * @testdox Modules\Admin\tests\Controller\SearchControllerTest: Admin api controller

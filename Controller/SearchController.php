@@ -36,7 +36,7 @@ final class SearchController extends Controller
      * @param ResponseAbstract $response Response
      * @param mixed            $data     Generic data
      *
-     * @return array
+     * @return void
      *
      * @api
      *
@@ -61,61 +61,67 @@ final class SearchController extends Controller
             ) + 1
         );
 
-        $files         = [];
-        $activeModules = $this->app->moduleManager->getActiveModules();
+        $files = [];
 
+        /** @var array<array{name:array{internal:string, external:string}}> @activeModules */
+        $activeModules = $this->app->moduleManager->getActiveModules();
         foreach ($activeModules as $module) {
-            $path    = __DIR__ . '/../../' . $module['name']['internal'] . '/Docs/Help/' . $lang;
+            $path = __DIR__ . '/../../' . $module['name']['internal'] . '/Docs/Help/' . $lang;
+
+            /** @var string[] $toCheck */
             $toCheck = Directory::listByExtension($path, 'md');
             foreach ($toCheck as $file) {
                 // @todo: create better matching
                 $content = \file_get_contents($path . '/' . $file);
-                if (($found = \stripos($content, $pattern)) !== false) {
-                    $contentLength = \strlen($content);
-                    $headline      = \strtok($content, "\n");
 
-                    $t1           = \strripos($content, "\n", -$contentLength + $found);
-                    $t2           = \strripos($content, '.', -$contentLength + $found);
-                    $summaryStart = ($t1 !== false && $t2 !== false) || $t1 === $t2
-                        ? \min(
-                            $t1 === false ? 0 : $t1,
-                            $t2 === false ? 0 : $t2,
-                        ) : \max(
-                            $t1 === false ? 0 : $t1,
-                            $t2 === false ? 0 : $t2,
-                        );
+                if ($content === false || ($found = \stripos($content, $pattern)) === false) {
+                    continue;
+                }
 
-                    $t1         = \stripos($content, "\n", $found);
-                    $t2         = \stripos($content, '.', $found);
-                    $summaryEnd = ($t1 !== false && $t2 !== false) || $t1 === $t2 ? \max(
-                            $t1 === false ? $contentLength : $t1,
-                            $t2 === false ? $contentLength : $t2,
-                        ) : \min(
-                            $t1 === false ? $contentLength : $t1,
-                            $t2 === false ? $contentLength : $t2,
-                        );
+                $contentLength = \strlen($content);
+                $headline      = \strtok($content, "\n");
 
-                    $summary = \substr(
-                        $content,
-                        $summaryStart + 1,
-                        $summaryEnd - $summaryStart
+                $t1           = \strripos($content, "\n", -$contentLength + $found);
+                $t2           = \strripos($content, '.', -$contentLength + $found);
+                $summaryStart = ($t1 !== false && $t2 !== false) || $t1 === $t2
+                    ? \min(
+                        $t1 === false ? 0 : $t1,
+                        $t2 === false ? 0 : $t2,
+                    ) : \max(
+                        $t1 === false ? 0 : $t1,
+                        $t2 === false ? 0 : $t2,
                     );
 
-                    $files[$module['name']['internal']][] = [
-                        'title'     => $module['name']['external'] . ': ' . \trim($headline, " #\r\n\t"),
-                        'summary'   => \trim($summary, " #\r\n\t"),
-                        'link'      => $path . '/' . $file,
-                        'account'   => '',
-                        'createdAt' => \max(
-                            \filectime($path . '/' . $file),
-                            \filemtime($path . '/' . $file)
-                        ),
-                        'image' => '',
-                        'tags'  => [],
-                        'type'  => 'list_links',
-                    ];
-                    // @todo: add match score for sorted return
-                }
+                $t1         = \stripos($content, "\n", $found);
+                $t2         = \stripos($content, '.', $found);
+                $summaryEnd = ($t1 !== false && $t2 !== false) || $t1 === $t2 ? \max(
+                        $t1 === false ? $contentLength : $t1,
+                        $t2 === false ? $contentLength : $t2,
+                    ) : \min(
+                        $t1 === false ? $contentLength : $t1,
+                        $t2 === false ? $contentLength : $t2,
+                    );
+
+                $summary = \substr(
+                    $content,
+                    $summaryStart + 1,
+                    $summaryEnd - $summaryStart
+                );
+
+                $files[$module['name']['internal']][] = [
+                    'title'     => $module['name']['external'] . ': ' . \trim($headline, " #\r\n\t"),
+                    'summary'   => \trim($summary, " #\r\n\t"),
+                    'link'      => $path . '/' . $file,
+                    'account'   => '',
+                    'createdAt' => \max(
+                        \filectime($path . '/' . $file),
+                        \filemtime($path . '/' . $file)
+                    ),
+                    'image' => '',
+                    'tags'  => [],
+                    'type'  => 'list_links',
+                ];
+                // @todo: add match score for sorted return
             }
         }
 

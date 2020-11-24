@@ -93,7 +93,7 @@ class SearchControllerTest extends \PHPUnit\Framework\TestCase
         $response = new HttpResponse();
         $request  = new HttpRequest(new HttpUri(''));
 
-        $request->getHeader()->setAccount(1);
+        $request->header->account = 1;
         $request->setData('search', ':help file');
 
         $this->module->searchHelp($request, $response);

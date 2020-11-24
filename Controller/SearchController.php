@@ -126,8 +126,8 @@ final class SearchController extends Controller
         }
 
         // @todo: probably cleanup return for link generation + sort by best match
-        $response->getHeader()->set('Content-Type', MimeType::M_JSON . '; charset=utf-8', true);
+        $response->header->set('Content-Type', MimeType::M_JSON . '; charset=utf-8', true);
 
-        $response->set($request->getUri()->__toString(), $files);
+        $response->set($request->uri->__toString(), $files);
     }
 }

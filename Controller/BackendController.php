@@ -27,11 +27,6 @@ use phpOMS\Views\View;
  * @license OMS License 1.0
  * @link    https://orange-management.org
  * @since   1.0.0
- *
- * @todo Orange-Management/oms-Help#1
- *  Add dev help documentation
- *  Currently only the end-user help documentation is shown in the modules.
- *  Implement the help documentation for developers as well.
  */
 final class BackendController extends Controller
 {

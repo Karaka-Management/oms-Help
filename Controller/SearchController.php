@@ -52,13 +52,16 @@ final class SearchController extends Controller
             $lang = $this->app->l11nServer->getLanguage();
         }
 
+        $searchIdStartPos = \stripos($request->getData('search'), ':');
+        $patternStartPos  = $searchIdStartPos === false ? -1 : \stripos(
+            $request->getData('search'),
+            ' ',
+            $searchIdStartPos
+        );
+
         $pattern = \substr(
             $request->getData('search'),
-            \stripos(
-                $request->getData('search'),
-                ' ',
-                \stripos($request->getData('search'), ':')
-            ) + 1
+            $patternStartPos + 1
         );
 
         $files = [];
@@ -79,7 +82,7 @@ final class SearchController extends Controller
                 }
 
                 $contentLength = \strlen($content);
-                $headline      = \strtok($content, "\n");
+                $headline      = ($temp = \strtok($content, "\n")) === false ? '' : $temp;
 
                 $t1           = \strripos($content, "\n", -$contentLength + $found);
                 $t2           = \strripos($content, '.', -$contentLength + $found);

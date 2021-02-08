@@ -12,7 +12,7 @@
 declare(strict_types=1);
 
 return ['Help' => [
-    'Module' => 'Modul',
+    'Module'  => 'Modul',
     'Modules' => 'Module',
-    'Name' => 'Name',
+    'Name'    => 'Name',
 ]];

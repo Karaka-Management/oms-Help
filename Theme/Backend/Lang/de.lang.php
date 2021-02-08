@@ -4,7 +4,6 @@
  *
  * PHP Version 8.0
  *
- * @package   Modules\Help
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
@@ -13,7 +12,7 @@
 declare(strict_types=1);
 
 return ['Help' => [
-    'Module'  => 'Modul',
+    'Module' => 'Modul',
     'Modules' => 'Module',
-    'Name'    => 'Name',
+    'Name' => 'Name',
 ]];

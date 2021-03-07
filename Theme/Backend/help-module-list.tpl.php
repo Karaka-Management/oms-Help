@@ -38,7 +38,7 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
                         </label>
                         <label for="moduleList-sort-2">
                             <input type="radio" name="moduleList-sort" id="moduleList-sort-2">
-                             <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc fa fa-chevron-down"></i>
                         </label>
                         <label>
                             <i class="filter fa fa-filter"></i>

@@ -31,7 +31,18 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
             <table id="moduleList" class="default">
                 <thead>
                 <tr>
-                    <td class="wf-100"><?= $this->getHtml('Name'); ?><i class="sort-asc fa fa-chevron-up"></i><i class="sort-desc fa fa-chevron-down"></i>
+                    <td class="wf-100"><?= $this->getHtml('Name'); ?>
+                         <label for="moduleList-sort-1">
+                            <input type="radio" name="moduleList-sort" id="moduleList-sort-1">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="moduleList-sort-2">
+                            <input type="radio" name="moduleList-sort" id="moduleList-sort-2">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                 <tbody>
                 <?php
                 $count = 0;

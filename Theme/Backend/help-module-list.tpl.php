@@ -28,7 +28,7 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
     <div class="col-xs-12">
         <div class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Modules'); ?><i class="fa fa-download floatRight download btn"></i></div>
-            <table id="moduleList" class="default">
+            <table id="moduleList" class="default sticky">
                 <thead>
                 <tr>
                     <td class="wf-100"><?= $this->getHtml('Name'); ?>

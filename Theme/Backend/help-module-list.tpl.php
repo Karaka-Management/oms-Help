@@ -47,7 +47,9 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
                 <?php
                 $count = 0;
                 foreach ($modules as $key => $module) :
-                    if ((\realpath(__DIR__ . '/../../../' . $module->getDirectory() . '/Docs/Help/en/SUMMARY.md')) === false) {
+                    if ((\realpath(__DIR__ . '/../../../' . $module->getDirectory() . '/Docs/Help/en/SUMMARY.md')) === false
+                        && (\realpath(__DIR__ . '/../../../' . $module->getDirectory() . '/Docs/Dev/en/SUMMARY.md')) === false
+                    ) {
                         continue;
                     }
 

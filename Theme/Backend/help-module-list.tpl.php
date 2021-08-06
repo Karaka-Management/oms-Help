@@ -20,8 +20,10 @@ use phpOMS\Uri\UriFactory;
  */
 $modules = $this->getData('modules');
 
+/*
 $previous = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \reset($modules)->getId() . '&ptype=p';
 $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \end($modules)->getId() . '&ptype=n';
+*/
 ?>
 
 <div class="row">
@@ -66,10 +68,6 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
                     <tr><td class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
                 <?php endif; ?>
             </table>
-            <div class="portlet-foot">
-                <a class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
-                <a class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
-            </div>
         </div>
     </div>
 </div>

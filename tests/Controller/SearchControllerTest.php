@@ -44,6 +44,9 @@ class SearchControllerTest extends \PHPUnit\Framework\TestCase
      */
     protected ModuleAbstract $module;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function setUp() : void
     {
         $this->app = new class() extends ApplicationAbstract

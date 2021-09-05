@@ -30,6 +30,7 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
     <div class="col-xs-12">
         <div class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Modules'); ?><i class="fa fa-download floatRight download btn"></i></div>
+            <div class="slider">
             <table id="moduleList" class="default sticky">
                 <thead>
                 <tr>
@@ -68,6 +69,7 @@ $next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/modul
                     <tr><td class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
                 <?php endif; ?>
             </table>
+            </div>
         </div>
     </div>
 </div>

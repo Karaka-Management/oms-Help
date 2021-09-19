@@ -182,7 +182,9 @@ final class BackendController extends Controller
     private function getHelpModulePath(RequestAbstract $request) : string
     {
         $type = 'Help';
-        if ($request->getData('page') === 'table-of-contencts' || $request->getData('page') === null) {
+        if ($request->getData('page') === 'table-of-contencts'
+            || $request->getData('page') === null
+        ) {
             $page = 'introduction';
         } else {
             $decoded = \urldecode($request->getData('page'));

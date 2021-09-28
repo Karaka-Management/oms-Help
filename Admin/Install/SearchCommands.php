@@ -23,7 +23,7 @@ return [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
             'permission' => [
-                'module' => SearchController::MODULE_NAME,
+                'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::HELP_MODULE,
             ],
@@ -34,7 +34,7 @@ return [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
             'permission' => [
-                'module' => SearchController::MODULE_NAME,
+                'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::HELP_MODULE,
             ],
@@ -45,7 +45,7 @@ return [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
             'permission' => [
-                'module' => SearchController::MODULE_NAME,
+                'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::HELP_DEVELOPER,
             ],
@@ -56,7 +56,7 @@ return [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
             'permission' => [
-                'module' => SearchController::MODULE_NAME,
+                'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::HELP_MODULE,
             ],

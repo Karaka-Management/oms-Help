@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 return ['Help' => [
-    'Module'  => 'modül',
+    'Module'  => 'Modül',
     'Modules' => 'Modüller',
-    'Name'    => 'ad',
+    'Name'    => 'İsim',
 ]];

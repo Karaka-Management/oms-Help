@@ -12,8 +12,9 @@
  */
 declare(strict_types=1);
 
-return ['Help' => [
-    'Module'  => 'Moduuli',
-    'Modules' => 'Moduulit',
-    'Name'    => 'Nimi',
+return ['Navigation' => [
+    'Developer' => 'Розробник',
+    'General'   => 'Загальний',
+    'Help'      => 'Довідка',
+    'Modules'   => 'Модулі',
 ]];

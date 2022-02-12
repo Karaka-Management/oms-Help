@@ -14,6 +14,6 @@ declare(strict_types=1);
 
 return ['Help' => [
     'Module'  => 'Μονάδα μέτρησης',
-    'Modules' => 'ενότητες',
+    'Modules' => 'Ενότητες',
     'Name'    => 'Ονομα',
 ]];

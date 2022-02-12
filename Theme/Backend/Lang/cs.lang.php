@@ -14,6 +14,6 @@ declare(strict_types=1);
 
 return ['Help' => [
     'Module'  => 'Modul',
-    'Modules' => 'moduly',
+    'Modules' => 'Moduly',
     'Name'    => 'název',
 ]];

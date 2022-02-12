@@ -12,8 +12,9 @@
  */
 declare(strict_types=1);
 
-return ['Help' => [
-    'Module'  => 'Moduuli',
-    'Modules' => 'Moduulit',
-    'Name'    => 'Nimi',
+return ['Navigation' => [
+    'Developer' => '开发人员',
+    'General'   => '一般的',
+    'Help'      => '帮助',
+    'Modules'   => '模块',
 ]];

@@ -12,8 +12,9 @@
  */
 declare(strict_types=1);
 
-return ['Help' => [
-    'Module'  => 'Moduuli',
-    'Modules' => 'Moduulit',
-    'Name'    => 'Nimi',
+return ['Navigation' => [
+    'Developer' => 'ผู้พัฒนา',
+    'General'   => 'ทั่วไป',
+    'Help'      => 'ช่วย',
+    'Modules'   => 'โมดูล',
 ]];

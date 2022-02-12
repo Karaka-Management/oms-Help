@@ -15,5 +15,5 @@ declare(strict_types=1);
 return ['Help' => [
     'Module'  => '模块',
     'Modules' => '模块',
-    'Name'    => '姓名',
+    'Name'    => '名称',
 ]];

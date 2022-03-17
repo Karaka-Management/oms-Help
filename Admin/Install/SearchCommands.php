@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 use Modules\Help\Controller\SearchController;
-use Modules\Help\Models\PermissionState;
+use Modules\Help\Models\PermissionCategory;
 use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
@@ -25,7 +25,7 @@ return [
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::HELP_MODULE,
+                'state'  => PermissionCategory::HELP_MODULE,
             ],
         ],
     ],
@@ -36,7 +36,7 @@ return [
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::HELP_MODULE,
+                'state'  => PermissionCategory::HELP_MODULE,
             ],
         ],
     ],
@@ -47,7 +47,7 @@ return [
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::HELP_DEVELOPER,
+                'state'  => PermissionCategory::HELP_DEVELOPER,
             ],
         ],
     ],
@@ -58,7 +58,7 @@ return [
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::HELP_MODULE,
+                'state'  => PermissionCategory::HELP_MODULE,
             ],
         ],
     ],

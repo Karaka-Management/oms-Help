@@ -43,7 +43,7 @@ final class BackendController extends Controller
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewHelp(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewHelp(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Help/Theme/Backend/help');
@@ -63,13 +63,13 @@ final class BackendController extends Controller
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewHelpGeneral(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewHelpGeneral(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $path = $this->getHelpGeneralPath($request);
 
         $toParse = \file_get_contents($path);
-        $summary = \file_get_contents(__DIR__ . '/../../../Documentation/SUMMARY.md');
+        $summary = \file_get_contents(__DIR__ . '/../../../User-Guide/SUMMARY.md');
 
         $content    = Markdown::parse($toParse === false ? '' : $toParse);
         $navigation = Markdown::parse($summary === false ? '' : $summary);
@@ -94,13 +94,13 @@ final class BackendController extends Controller
     private function getHelpGeneralPath(RequestAbstract $request) : string
     {
         if ($request->getData('page') === 'README' || $request->getData('page') === null) {
-            $path = \realpath(__DIR__ . '/../../../Documentation/README.md');
+            $path = \realpath(__DIR__ . '/../../../User-Guide/README.md');
         } else {
-            $path = \realpath(__DIR__ . '/../../../Documentation/' . $request->getData('page') . '.md');
+            $path = \realpath(__DIR__ . '/../../../User-Guide/' . $request->getData('page') . '.md');
         }
 
         if ($path === false) {
-            $path = \realpath(__DIR__ . '/../../../Documentation/README.md');
+            $path = \realpath(__DIR__ . '/../../../User-Guide/README.md');
         }
 
         return $path === false ? '' : $path;
@@ -118,7 +118,7 @@ final class BackendController extends Controller
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewHelpModuleList(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewHelpModuleList(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Help/Theme/Backend/help-module-list');
@@ -140,7 +140,7 @@ final class BackendController extends Controller
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewHelpModule(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewHelpModule(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $active = $this->app->moduleManager->getActiveModules();
 
@@ -227,7 +227,7 @@ final class BackendController extends Controller
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewHelpDeveloper(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewHelpDeveloper(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $path = $this->getHelpDeveloperPath($request);

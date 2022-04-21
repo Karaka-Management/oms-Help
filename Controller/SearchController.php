@@ -42,7 +42,7 @@ final class SearchController extends Controller
      *
      * @since 1.0.0
      */
-    public function searchHelp(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function searchHelp(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         $lang = 'en';
 

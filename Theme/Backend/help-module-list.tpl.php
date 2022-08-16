@@ -20,32 +20,31 @@ use phpOMS\Uri\UriFactory;
  */
 $modules = $this->getData('modules');
 
-/*
-$previous = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \reset($modules)->getId() . '&ptype=p';
-$next     = empty($modules) ? '{/prefix}help/module/list' : '{/prefix}help/module/list?{?}&id=' . \end($modules)->getId() . '&ptype=n';
-*/
+$tableView            = $this->getData('tableView');
+$tableView->id        = 'helpModuleList';
+$tableView->baseUri   = '{/prefix}help/module/list';
+$tableView->exportUri = '{/api}admin/module/list/export';
+$tableView->setObjects($modules);
 ?>
 
 <div class="row">
     <div class="col-xs-12">
         <div class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Modules'); ?><i class="fa fa-download floatRight download btn"></i></div>
+            <div class="portlet-head">
+                <?= $tableView->renderTitle(
+                    $this->getHtml('Modules'),
+                    false
+                ); ?>
+            </div>
             <div class="slider">
-            <table id="moduleList" class="default sticky">
+            <table id="<?= $tableView->id; ?>" class="default sticky">
                 <thead>
                 <tr>
-                    <td class="wf-100"><?= $this->getHtml('Name'); ?>
-                         <label for="moduleList-sort-1">
-                            <input type="radio" name="moduleList-sort" id="moduleList-sort-1">
-                            <i class="sort-asc fa fa-chevron-up"></i>
-                        </label>
-                        <label for="moduleList-sort-2">
-                            <input type="radio" name="moduleList-sort" id="moduleList-sort-2">
-                            <i class="sort-desc fa fa-chevron-down"></i>
-                        </label>
-                        <label>
-                            <i class="filter fa fa-filter"></i>
-                        </label>
+                    <td class="wf-100"><?= $tableView->renderHeaderElement(
+                            'module',
+                            $this->getHtml('Name'),
+                            'text'
+                        ); ?>
                 <tbody>
                 <?php
                 $count = 0;

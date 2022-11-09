@@ -22,7 +22,7 @@ $modules = $this->getData('modules');
 
 $tableView            = $this->getData('tableView');
 $tableView->id        = 'helpModuleList';
-$tableView->baseUri   = '{/prefix}help/module/list';
+$tableView->baseUri   = 'help/module/list';
 $tableView->exportUri = '{/api}admin/module/list/export';
 $tableView->setObjects($modules);
 ?>

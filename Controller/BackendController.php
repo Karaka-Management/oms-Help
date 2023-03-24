@@ -6,7 +6,7 @@
  *
  * @package   Modules\Help
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -27,7 +27,7 @@ use Web\Backend\Views\TableView;
  * Help class.
  *
  * @package Modules\Help
- * @license OMS License 1.0
+ * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  * @codeCoverageIgnore
@@ -96,7 +96,7 @@ final class BackendController extends Controller
      */
     private function getHelpGeneralPath(RequestAbstract $request) : string
     {
-        if ($request->getData('page') === 'README' || $request->getData('page') === null) {
+        if ($request->getData('page') === 'README' || !$request->hasData('page')) {
             $path = \realpath(__DIR__ . '/../../../User-Guide/README.md');
         } else {
             $path = \realpath(__DIR__ . '/../../../User-Guide/' . $request->getData('page') . '.md');
@@ -176,7 +176,7 @@ final class BackendController extends Controller
     {
         $active = $this->app->moduleManager->getActiveModules();
 
-        if ($request->getData('id') === null || !isset($active[$request->getData('id')])) {
+        if (!$request->hasData('id') || !isset($active[$request->getData('id')])) {
             return $this->viewHelpModuleList($request, $response, $data);
         }
 
@@ -216,11 +216,11 @@ final class BackendController extends Controller
     {
         $type = 'Help';
         if ($request->getData('page') === 'table-of-contencts'
-            || $request->getData('page') === null
+            || !$request->hasData('page')
         ) {
             $page = 'introduction';
         } else {
-            $decoded = \urldecode($request->getData('page'));
+            $decoded = \urldecode($request->getDataString('page') ?? '');
             $typePos = \stripos($decoded, '/');
             $typePos = $typePos === false ? -1 : $typePos;
             $page    = \substr($decoded, $typePos + 1);
@@ -289,7 +289,7 @@ final class BackendController extends Controller
      */
     private function getHelpDeveloperPath(RequestAbstract $request) : string
     {
-        if ($request->getData('page') === 'README' || $request->getData('page') === null) {
+        if ($request->getData('page') === 'README' || !$request->hasData('page')) {
             $path = \realpath(__DIR__ . '/../../../Developer-Guide/README.md');
         } else {
             $path = \realpath(__DIR__ . '/../../../Developer-Guide/' . $request->getData('page') . '.md');

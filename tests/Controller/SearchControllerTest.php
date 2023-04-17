@@ -68,7 +68,7 @@ final class SearchControllerTest extends \PHPUnit\Framework\TestCase
 
         $permission = new AccountPermission();
         $permission->setUnit(1);
-        $permission->setApp('api');
+        $permission->setApp(1);
         $permission->setPermission(
             PermissionType::READ
             | PermissionType::CREATE

@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-md-8 col-lg-9">
         <section class="portlet">
             <article>
-                <?= $this->getData('content'); ?>
+                <?= $this->data['content']; ?>
             </article>
         </section>
     </div>
@@ -10,7 +10,7 @@
     <div class="col-xs-12 col-md-4 col-lg-3">
         <section class="portlet">
             <article>
-                <?= $this->getData('navigation'); ?>
+                <?= $this->data['navigation']; ?>
             </article>
         </section>
     </div>

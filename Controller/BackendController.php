@@ -78,8 +78,8 @@ final class BackendController extends Controller
         $navigation = Markdown::parse($summary === false ? '' : $summary);
 
         $view->setTemplate('/Modules/Help/Theme/Backend/help-general');
-        $view->setData('content', $content);
-        $view->setData('navigation', $navigation);
+        $view->data['content'] = $content;
+        $view->data['navigation'] = $navigation;
 
         return $view;
     }
@@ -126,7 +126,7 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Help/Theme/Backend/help-module-list');
 
-        $view->setData('modules', $this->app->moduleManager->getInstalledModules());
+        $view->data['modules'] = $this->app->moduleManager->getInstalledModules();
 
         /** @var \Model\Setting[] $exportTemplates */
         $exportTemplates = $this->app->appSettings->get(
@@ -155,7 +155,7 @@ final class BackendController extends Controller
         $tableView->setFilterTemplate('/Web/Backend/Themes/popup-filter-table');
         $tableView->setSortTemplate('/Web/Backend/Themes/sort-table');
 
-        $view->addData('tableView', $tableView);
+        $view->data['tableView'] = $tableView;
 
         return $view;
     }
@@ -195,9 +195,9 @@ final class BackendController extends Controller
         $devNavigation = empty($devSummary) ? null : Markdown::parse($devSummary);
 
         $view->setTemplate('/Modules/Help/Theme/Backend/help-module');
-        $view->setData('content', $content);
-        $view->setData('navigation', $navigation);
-        $view->setData('devNavigation', $devNavigation);
+        $view->data['content'] = $content;
+        $view->data['navigation'] = $navigation;
+        $view->data['devNavigation'] = $devNavigation;
 
         return $view;
     }
@@ -227,7 +227,7 @@ final class BackendController extends Controller
             $type    = \substr($decoded, 0, $typePos);
         }
 
-        $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->getLanguage();
+        $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->header->l11n->language;
         $path     = \realpath($basePath . '/' . $page . '.md');
 
         if ($path === false) {
@@ -271,8 +271,8 @@ final class BackendController extends Controller
         $navigation = Markdown::parse($summary === false ? '' : $summary);
 
         $view->setTemplate('/Modules/Help/Theme/Backend/help-developer');
-        $view->setData('content', $content);
-        $view->setData('navigation', $navigation);
+        $view->data['content'] = $content;
+        $view->data['navigation'] = $navigation;
 
         return $view;
     }

@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-md-8 col-lg-9">
         <section class="portlet">
             <div class="portlet-body">
-                <article><?= $this->getData('content'); ?></article>
+                <article><?= $this->data['content']; ?></article>
             </div>
         </section>
     </div>
@@ -15,7 +15,7 @@
         <?php if ($this->hasData('navigation')) : ?>
         <section class="portlet">
             <div class="portlet-body">
-                <article><?= $this->getData('navigation'); ?></article>
+                <article><?= $this->data['navigation']; ?></article>
             </div>
         </section>
         <?php endif; ?>
@@ -23,7 +23,7 @@
         <?php if ($this->hasData('devNavigation')) : ?>
         <section class="portlet">
             <div class="portlet-body">
-                <article><?= $this->getData('devNavigation'); ?></article>
+                <article><?= $this->data['devNavigation']; ?></article>
             </div>
         </section>
         <?php endif; ?>

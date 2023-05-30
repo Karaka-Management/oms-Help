@@ -18,9 +18,9 @@ use phpOMS\Uri\UriFactory;
  * @var \phpOMS\Views\View          $this
  * @var \phpOMS\Module\ModuleInfo[] $modules
  */
-$modules = $this->getData('modules');
+$modules = $this->data['modules'];
 
-$tableView            = $this->getData('tableView');
+$tableView            = $this->data['tableView'];
 $tableView->id        = 'helpModuleList';
 $tableView->baseUri   = 'help/module/list';
 $tableView->exportUri = '{/api}admin/module/list/export';

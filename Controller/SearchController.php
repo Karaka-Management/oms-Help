@@ -46,8 +46,8 @@ final class SearchController extends Controller
     {
         $lang = 'en';
 
-        if (\is_dir(__DIR__ . '/../Docs/Help/' . $request->getLanguage())) {
-            $lang = $request->getLanguage();
+        if (\is_dir(__DIR__ . '/../Docs/Help/' . $request->header->l11n->language)) {
+            $lang = $request->header->l11n->language;
         } elseif (\is_dir(__DIR__ . '/../Docs/Help/' . $this->app->l11nServer->getLanguage())) {
             $lang = $this->app->l11nServer->getLanguage();
         }

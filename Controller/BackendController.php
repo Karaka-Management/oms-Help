@@ -227,7 +227,7 @@ final class BackendController extends Controller
             $type    = \substr($decoded, 0, $typePos);
         }
 
-        $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->getLanguage();
+        $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $request->header->l11n->language;
         $path     = \realpath($basePath . '/' . $page . '.md');
 
         if ($path === false) {

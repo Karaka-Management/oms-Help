@@ -78,7 +78,7 @@ final class BackendController extends Controller
         $navigation = Markdown::parse($summary === false ? '' : $summary);
 
         $view->setTemplate('/Modules/Help/Theme/Backend/help-general');
-        $view->data['content'] = $content;
+        $view->data['content']    = $content;
         $view->data['navigation'] = $navigation;
 
         return $view;
@@ -195,8 +195,8 @@ final class BackendController extends Controller
         $devNavigation = empty($devSummary) ? null : Markdown::parse($devSummary);
 
         $view->setTemplate('/Modules/Help/Theme/Backend/help-module');
-        $view->data['content'] = $content;
-        $view->data['navigation'] = $navigation;
+        $view->data['content']       = $content;
+        $view->data['navigation']    = $navigation;
         $view->data['devNavigation'] = $devNavigation;
 
         return $view;
@@ -271,7 +271,7 @@ final class BackendController extends Controller
         $navigation = Markdown::parse($summary === false ? '' : $summary);
 
         $view->setTemplate('/Modules/Help/Theme/Backend/help-developer');
-        $view->data['content'] = $content;
+        $view->data['content']    = $content;
         $view->data['navigation'] = $navigation;
 
         return $view;

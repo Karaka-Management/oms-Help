@@ -48,8 +48,8 @@ final class SearchController extends Controller
 
         if (\is_dir(__DIR__ . '/../Docs/Help/' . $request->header->l11n->language)) {
             $lang = $request->header->l11n->language;
-        } elseif (\is_dir(__DIR__ . '/../Docs/Help/' . $this->app->l11nServer->getLanguage())) {
-            $lang = $this->app->l11nServer->getLanguage();
+        } elseif (\is_dir(__DIR__ . '/../Docs/Help/' . $this->app->l11nServer->language)) {
+            $lang = $this->app->l11nServer->language;
         }
 
         $searchIdStartPos = \stripos($request->getDataString('search') ?? '', ':');

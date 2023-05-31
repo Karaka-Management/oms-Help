@@ -231,7 +231,7 @@ final class BackendController extends Controller
         $path     = \realpath($basePath . '/' . $page . '.md');
 
         if ($path === false) {
-            $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $this->app->l11nServer->getLanguage();
+            $basePath = __DIR__ . '/../../' . $request->getData('id') . '/Docs/' . $type . '/' . $this->app->l11nServer->language;
             $path     = \realpath($basePath . '/' . $page . '.md');
         }
 

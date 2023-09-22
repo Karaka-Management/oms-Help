@@ -141,6 +141,7 @@ final class BackendController extends Controller
             $templateIds[] = (int) $template->content;
         }
 
+        /** @var \Modules\Media\Models\Media[] $mediaTemplates */
         $mediaTemplates = MediaMapper::getAll()
             ->where('id', $templateIds, 'in')
             ->execute();

@@ -34,7 +34,7 @@ final class SearchController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -42,7 +42,7 @@ final class SearchController extends Controller
      *
      * @since 1.0.0
      */
-    public function searchHelp(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function searchHelp(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         $lang = 'en';
 

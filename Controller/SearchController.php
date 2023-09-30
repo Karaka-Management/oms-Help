@@ -45,24 +45,20 @@ final class SearchController extends Controller
     public function searchHelp(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         $lang = 'en';
-
         if (\is_dir(__DIR__ . '/../Docs/Help/' . $request->header->l11n->language)) {
             $lang = $request->header->l11n->language;
         } elseif (\is_dir(__DIR__ . '/../Docs/Help/' . $this->app->l11nServer->language)) {
             $lang = $this->app->l11nServer->language;
         }
 
-        $searchIdStartPos = \stripos($request->getDataString('search') ?? '', ':');
-        $patternStartPos  = $searchIdStartPos === false ? -1 : \stripos(
-            $request->getDataString('search') ?? '',
-            ' ',
-            $searchIdStartPos
-        );
+        $search = $request->getDataString('search') ?? '';
 
-        $pattern = \substr(
-            $request->getDataString('search') ?? '',
-            $patternStartPos + 1
-        );
+        $searchIdStartPos = \stripos($search, ':');
+        $patternStartPos  = $searchIdStartPos === false
+            ? -1
+            : \stripos($search, ' ', $searchIdStartPos);
+
+        $pattern = \substr($search, $patternStartPos + 1);
 
         $files = [];
 
@@ -97,7 +93,8 @@ final class SearchController extends Controller
 
                 $t1         = \stripos($content, "\n", $found);
                 $t2         = \stripos($content, '.', $found);
-                $summaryEnd = ($t1 !== false && $t2 !== false) || $t1 === $t2 ? \max(
+                $summaryEnd = ($t1 !== false && $t2 !== false) || $t1 === $t2
+                    ? \max(
                         $t1 === false ? $contentLength : $t1,
                         $t2 === false ? $contentLength : $t2,
                     ) : \min(

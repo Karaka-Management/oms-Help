@@ -100,6 +100,6 @@ final class SearchControllerTest extends \PHPUnit\Framework\TestCase
         $request->setData('search', ':help introduction');
 
         $this->module->searchHelp($request, $response);
-        self::assertGreaterThan(0, \count($response->get('')));
+        self::assertGreaterThan(0, \count($response->getData('')));
     }
 }

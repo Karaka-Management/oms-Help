@@ -57,8 +57,7 @@ $tableView->setObjects($modules);
 
                     ++$count;
                     $url = UriFactory::build(
-                        '{/lang}/backend/help/module/single?id={$module}',
-                        ['$module' => $module->getInternalName()]
+                        '{/lang}/backend/help/module/single?id=' . $module->getInternalName()
                     );
                 ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">

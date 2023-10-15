@@ -2,7 +2,11 @@
     <div class="col-xs-12 col-md-8 col-lg-9">
         <section class="portlet">
             <div class="portlet-body">
-                <article><?= $this->data['content']; ?></article>
+                <?php if (empty($this->data['content'])) : ?>
+                    <img height="100%" width="100%" src="Web/Backend/img/under_construction.svg">
+                <?php else : ?>
+                    <article><?= $this->data['content']; ?></article>
+                <?php endif; ?>
             </div>
         </section>
     </div>
@@ -12,7 +16,7 @@
             <a tabindex="0" class="button" href="<?= \phpOMS\Uri\UriFactory::build('{/lang}/backend/help/module/single?id={?id}'); ?>"><?= $this->getHtml('Module'); ?></a>
         </div>
 
-        <?php if ($this->hasData('navigation')) : ?>
+        <?php if (!empty($this->data['navigation'] ?? '')) : ?>
         <section class="portlet">
             <div class="portlet-body">
                 <article><?= $this->data['navigation']; ?></article>
@@ -20,7 +24,7 @@
         </section>
         <?php endif; ?>
 
-        <?php if ($this->hasData('devNavigation')) : ?>
+        <?php if (!empty($this->data['devNavigation'] ?? '')) : ?>
         <section class="portlet">
             <div class="portlet-body">
                 <article><?= $this->data['devNavigation']; ?></article>

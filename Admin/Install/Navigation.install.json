@@ -7,7 +7,7 @@
         "name": "Help",
         "uri": null,
         "target": "self",
-        "icon": "fa fa-question-circle",
+        "icon": "live_help",
         "order": 0,
         "from": "Help",
         "permission": { "permission": 2, "category": null, "element": null },

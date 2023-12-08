@@ -70,7 +70,7 @@ final class SearchController extends Controller
             /** @var string[] $toCheck */
             $toCheck = Directory::listByExtension($path, 'md');
             foreach ($toCheck as $file) {
-                // @todo: create better matching
+                // @todo create better matching
                 $content = \file_get_contents($path . '/' . $file);
 
                 if ($content === false || ($found = \stripos($content, $pattern)) === false) {
@@ -121,11 +121,11 @@ final class SearchController extends Controller
                     'tags'  => [],
                     'type'  => 'list_links',
                 ];
-                // @todo: add match score for sorted return
+                // @todo add match score for sorted return
             }
         }
 
-        // @todo: probably cleanup return for link generation + sort by best match
+        // @todo probably cleanup return for link generation + sort by best match
         $response->header->set('Content-Type', MimeType::M_JSON . '; charset=utf-8', true);
         $response->set($request->uri->__toString(), $files);
     }

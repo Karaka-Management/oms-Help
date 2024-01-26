@@ -18,7 +18,7 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^:help .*$' => [
+    '^:help (\?.*$|$)' => [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
@@ -29,7 +29,7 @@ return [
             ],
         ],
     ],
-    '^:help :user .*$' => [
+    '^:help :user (\?.*$|$)' => [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
@@ -40,7 +40,7 @@ return [
             ],
         ],
     ],
-    '^:help :dev .*$' => [
+    '^:help :dev (\?.*$|$)' => [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
@@ -51,7 +51,7 @@ return [
             ],
         ],
     ],
-    '^:help :module .*$' => [
+    '^:help :module (\?.*$|$)' => [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,

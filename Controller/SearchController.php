@@ -108,8 +108,8 @@ final class SearchController extends Controller
                     $summaryEnd - $summaryStart
                 );
 
-                $files[$module['name']['internal']][] = [
-                    'title'     => $module['name']['external'] . ': ' . \trim($headline, " #\r\n\t"),
+                $files[] = [
+                    'title'     => \trim($headline, " #\r\n\t"),
                     'summary'   => \trim($summary, " #\r\n\t"),
                     'link'      => $path . '/' . $file,
                     'account'   => '',
@@ -127,6 +127,6 @@ final class SearchController extends Controller
 
         // @todo probably cleanup return for link generation + sort by best match
         $response->header->set('Content-Type', MimeType::M_JSON . '; charset=utf-8', true);
-        $response->set($request->uri->__toString(), $files);
+        $response->add($request->uri->__toString(), $files);
     }
 }

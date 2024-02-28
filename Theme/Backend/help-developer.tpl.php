@@ -7,7 +7,7 @@
         </section>
     </div>
 
-    <div class="col-xs-12 col-md-4 col-lg-3">
+    <div class="col-xs-12 col-md-4 col-lg-3 pH">
         <section class="portlet">
             <article>
                 <?= $this->data['navigation']; ?>

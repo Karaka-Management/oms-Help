@@ -14,8 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\Help\Controller;
 
-use Modules\Admin\Models\SettingsEnum;
-use Modules\Media\Models\MediaMapper;
+use phpOMS\Asset\AssetType;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
@@ -54,6 +53,16 @@ final class BackendController extends Controller
         return $view;
     }
 
+    private function loadCodeHighlighting(ResponseAbstract $response) : void
+    {
+        $head  = $response->data['Content']->head;
+        $nonce = $this->app->appSettings->getOption('script-nonce');
+
+        $head->addAsset(AssetType::CSS, 'Resources/highlightjs/styles/a11y-light.min.css?v=' . $this->app->version);
+        $head->addAsset(AssetType::JSLATE, 'Resources/highlightjs/highlight.min.js?v=' . $this->app->version, ['nonce' => $nonce]);
+        $head->addAsset(AssetType::JSLATE, 'Modules/Help/Controller/Controller.js?v=' . self::VERSION, ['nonce' => $nonce, 'type' => 'module']);
+    }
+
     /**
      * Routing end-point for application behavior.
      *
@@ -68,6 +77,8 @@ final class BackendController extends Controller
      */
     public function viewHelpGeneral(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
+        $this->loadCodeHighlighting($response);
+
         $view = new View($this->app->l11nManager, $request, $response);
         $path = $this->getHelpGeneralPath($request);
 
@@ -128,30 +139,12 @@ final class BackendController extends Controller
 
         $view->data['modules'] = $this->app->moduleManager->getInstalledModules();
 
-        /** @var \Model\Setting[] $exportTemplates */
-        $exportTemplates = $this->app->appSettings->get(
-            names: [
-                SettingsEnum::DEFAULT_LIST_EXPORTS,
-            ],
-            module: 'Admin'
-        );
-
-        $templateIds = [];
-        foreach ($exportTemplates as $template) {
-            $templateIds[] = (int) $template->content;
-        }
-
-        /** @var \Modules\Media\Models\Media[] $mediaTemplates */
-        $mediaTemplates = MediaMapper::getAll()
-            ->where('id', $templateIds, 'in')
-            ->execute();
-
         $tableView         = new TableView($this->app->l11nManager, $request, $response);
         $tableView->module = 'Help';
         $tableView->theme  = 'Backend';
         $tableView->setTitleTemplate('/Web/Backend/Themes/table-title');
         $tableView->setExportTemplate('/Web/Backend/Themes/popup-export-data');
-        $tableView->setExportTemplates($mediaTemplates);
+        $tableView->setExportTemplates([]);
         $tableView->setColumnHeaderElementTemplate('/Web/Backend/Themes/header-element-table');
         $tableView->setFilterTemplate('/Web/Backend/Themes/popup-filter-table');
         $tableView->setSortTemplate('/Web/Backend/Themes/sort-table');
@@ -175,6 +168,8 @@ final class BackendController extends Controller
      */
     public function viewHelpModule(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
+        $this->loadCodeHighlighting($response);
+
         $active = $this->app->moduleManager->getActiveModules();
 
         if (!$request->hasData('id') || !isset($active[$request->getData('id')])) {
@@ -262,6 +257,8 @@ final class BackendController extends Controller
      */
     public function viewHelpDeveloper(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
+        $this->loadCodeHighlighting($response);
+
         $view = new View($this->app->l11nManager, $request, $response);
         $path = $this->getHelpDeveloperPath($request);
 

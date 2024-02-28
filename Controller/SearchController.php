@@ -40,6 +40,12 @@ final class SearchController extends Controller
      *
      * @api
      *
+     * @todo Improve the searchHelp() function.
+     *      It is slow and uses very stupid search logic
+     *      Solution: Elasticsearch
+     *      https://github.com/Karaka-Management/oms-Help/issues/4
+     *      https://github.com/Karaka-Management/Karaka/issues/160
+     *
      * @since 1.0.0
      */
     public function searchHelp(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void

@@ -11,7 +11,7 @@
         </section>
     </div>
 
-    <div class="col-xs-12 col-md-4 col-lg-3">
+    <div class="col-xs-12 col-md-4 col-lg-3 pH">
         <div class="box wf-100">
             <a tabindex="0" class="button" href="<?= \phpOMS\Uri\UriFactory::build('{/lang}/backend/help/module/view?id={?id}'); ?>"><?= $this->getHtml('Module'); ?></a>
         </div>

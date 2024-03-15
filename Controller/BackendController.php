@@ -53,6 +53,15 @@ final class BackendController extends Controller
         return $view;
     }
 
+    /**
+     * Load code highlighting libraries for frontend
+     *
+     * @param ResponseAbstract $response Response
+     *
+     * @return void
+     *
+     * @since 1.0.0
+     */
     private function loadCodeHighlighting(ResponseAbstract $response) : void
     {
         $head  = $response->data['Content']->head;

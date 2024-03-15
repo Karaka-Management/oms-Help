@@ -40,7 +40,7 @@ return [
             ],
         ],
     ],
-    '^.*/help/module/single(\?.*)?$' => [
+    '^.*/help/module/view(\?.*)?$' => [
         [
             'dest'       => '\Modules\Help\Controller\BackendController:viewHelpModule',
             'verb'       => RouteVerb::GET,

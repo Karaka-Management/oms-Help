@@ -87,7 +87,7 @@ final class SearchControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Help\Controller\SearchController
+     * @covers \Modules\Help\Controller\SearchController
      * @group module
      */
     public function testHelpSearch() : void

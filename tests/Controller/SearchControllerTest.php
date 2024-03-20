@@ -30,10 +30,10 @@ use phpOMS\Router\WebRouter;
 use phpOMS\Utils\TestUtils;
 
 /**
- * @testdox Modules\Admin\tests\Controller\SearchControllerTest: Admin api controller
- *
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Help\Controller\SearchController::class)]
+#[\PHPUnit\Framework\Attributes\TestDox('Modules\Admin\tests\Controller\SearchControllerTest: Admin api controller')]
 final class SearchControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected ApplicationAbstract $app;
@@ -86,10 +86,7 @@ final class SearchControllerTest extends \PHPUnit\Framework\TestCase
         TestUtils::setMember($this->module, 'app', $this->app);
     }
 
-    /**
-     * @covers \Modules\Help\Controller\SearchController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testHelpSearch() : void
     {
         $response = new HttpResponse();

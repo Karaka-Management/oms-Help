@@ -29,7 +29,7 @@ $tableView->setObjects($modules);
 
 <div class="row">
     <div class="col-xs-12">
-        <div class="portlet">
+        <section class="portlet">
             <div class="portlet-head">
                 <?= $tableView->renderTitle(
                     $this->getHtml('Modules'),
@@ -68,6 +68,6 @@ $tableView->setObjects($modules);
                 <?php endif; ?>
             </table>
             </div>
-        </div>
+        </section>
     </div>
 </div>

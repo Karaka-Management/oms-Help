@@ -2,6 +2,7 @@ import { Autoloader } from '../../../jsOMS/Autoloader.js';
 
 Autoloader.defineNamespace('omsApp.Modules');
 
+/* global omsApp */
 omsApp.Modules.Help = class {
     /**
      * @constructor
@@ -13,16 +14,10 @@ omsApp.Modules.Help = class {
         this.app = app;
     };
 
-    bind (id)
+    bind ()
     {
-        const e    = typeof id === 'undefined' ? document.getElementsByTagName('code') : [document.getElementById(id)],
-            length = e.length;
-
+        /* global hljs */
         hljs.highlightAll();
-    };
-
-    bindElement (code)
-    {
     };
 };
 

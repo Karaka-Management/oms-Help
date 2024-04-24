@@ -2,7 +2,7 @@
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Modules\Admin\Template\Backend
  * @copyright Dennis Eichhorn
@@ -23,13 +23,13 @@ $modules = $this->data['modules'];
 $tableView            = $this->data['tableView'];
 $tableView->id        = 'helpModuleList';
 $tableView->baseUri   = 'help/module/list';
-$tableView->exportUri = '{/api}admin/module/list/export';
+$tableView->exportUri = '{/api}admin/module/list/export?csrf={$CSRF}';
 $tableView->setObjects($modules);
 ?>
 
 <div class="row">
     <div class="col-xs-12">
-        <div class="portlet">
+        <section class="portlet">
             <div class="portlet-head">
                 <?= $tableView->renderTitle(
                     $this->getHtml('Modules'),
@@ -68,6 +68,6 @@ $tableView->setObjects($modules);
                 <?php endif; ?>
             </table>
             </div>
-        </div>
+        </section>
     </div>
 </div>

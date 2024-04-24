@@ -18,17 +18,13 @@
 
         <?php if (!empty($this->data['navigation'] ?? '')) : ?>
         <section class="portlet">
-            <div class="portlet-body">
-                <article><?= $this->data['navigation']; ?></article>
-            </div>
+            <nav class="content-side-nav"><?= $this->data['navigation']; ?></nav>
         </section>
         <?php endif; ?>
 
         <?php if (!empty($this->data['devNavigation'] ?? '')) : ?>
         <section class="portlet">
-            <div class="portlet-body">
-                <article><?= $this->data['devNavigation']; ?></article>
-            </div>
+            <nav class="content-side-nav"><?= $this->data['devNavigation']; ?></nav>
         </section>
         <?php endif; ?>
     </div>

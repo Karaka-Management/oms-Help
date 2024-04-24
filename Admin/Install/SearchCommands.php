@@ -2,7 +2,7 @@
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Modules\Help
  * @copyright Dennis Eichhorn
@@ -22,6 +22,7 @@ return [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
+            'active'     => true,
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
@@ -33,6 +34,7 @@ return [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
+            'active'     => true,
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
@@ -44,6 +46,7 @@ return [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
+            'active'     => true,
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,
@@ -55,6 +58,7 @@ return [
         [
             'dest'       => '\Modules\Help\Controller\SearchController:searchHelp',
             'verb'       => RouteVerb::ANY,
+            'active'     => true,
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,

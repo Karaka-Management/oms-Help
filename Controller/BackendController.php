@@ -2,7 +2,7 @@
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Modules\Help
  * @copyright Dennis Eichhorn
@@ -70,6 +70,14 @@ final class BackendController extends Controller
         $head->addAsset(AssetType::CSS, 'Resources/highlightjs/styles/a11y-light.min.css?v=' . $this->app->version);
         $head->addAsset(AssetType::JSLATE, 'Resources/highlightjs/highlight.min.js?v=' . $this->app->version, ['nonce' => $nonce]);
         $head->addAsset(AssetType::JSLATE, 'Modules/Help/Controller/Controller.js?v=' . self::VERSION, ['nonce' => $nonce, 'type' => 'module']);
+    }
+
+    private function loadMermaid(ResponseAbstract $response) : void
+    {
+        $head  = $response->data['Content']->head;
+        $nonce = $this->app->appSettings->getOption('script-nonce');
+
+        $head->addAsset(AssetType::JSLATE, 'Resources/mermaid/mermaid.min.js?v=' . $this->app->version, ['nonce' => $nonce]);
     }
 
     /**
@@ -274,10 +282,16 @@ final class BackendController extends Controller
         $toParse = \file_get_contents($path);
         $summary = \file_get_contents(__DIR__ . '/../../../Developer-Guide/SUMMARY.md');
 
-        $content    = Markdown::parse($toParse === false ? '' : $toParse);
+        if (\stripos($toParse, '```mermaid') !== false) {
+            $this->loadMermaid($response);
+        }
+
+        $markdown = new Markdown();
+
+        $content    = $markdown->parse($toParse === false ? '' : $toParse);
         $navigation = Markdown::parse($summary === false ? '' : $summary);
 
-        $view->setTemplate('/Modules/Help/Theme/Backend/help-developer');
+        $view->setTemplate('/Modules/Help/Theme/Backend/help-general');
         $view->data['content']    = $content;
         $view->data['navigation'] = $navigation;
 

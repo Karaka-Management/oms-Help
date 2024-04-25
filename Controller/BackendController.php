@@ -54,7 +54,7 @@ final class BackendController extends Controller
     }
 
     /**
-     * Load code highlighting libraries for frontend
+     * Load code highlighting library for frontend
      *
      * @param ResponseAbstract $response Response
      *
@@ -72,6 +72,15 @@ final class BackendController extends Controller
         $head->addAsset(AssetType::JSLATE, 'Modules/Help/Controller/Controller.js?v=' . self::VERSION, ['nonce' => $nonce, 'type' => 'module']);
     }
 
+    /**
+     * Load mermaid library for frontend
+     *
+     * @param ResponseAbstract $response Response
+     *
+     * @return void
+     *
+     * @since 1.0.0
+     */
     private function loadMermaid(ResponseAbstract $response) : void
     {
         $head  = $response->data['Content']->head;

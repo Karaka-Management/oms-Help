@@ -291,7 +291,7 @@ final class BackendController extends Controller
         $toParse = \file_get_contents($path);
         $summary = \file_get_contents(__DIR__ . '/../../../Developer-Guide/SUMMARY.md');
 
-        if (\stripos($toParse, '```mermaid') !== false) {
+        if ($toParse !== false && \stripos($toParse, '```mermaid') !== false) {
             $this->loadMermaid($response);
         }
 

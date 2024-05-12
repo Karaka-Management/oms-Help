@@ -86,7 +86,9 @@ final class BackendController extends Controller
         $head  = $response->data['Content']->head;
         $nonce = $this->app->appSettings->getOption('script-nonce');
 
-        $head->addAsset(AssetType::JSLATE, 'Resources/mermaid/mermaid.min.js?v=' . $this->app->version, ['nonce' => $nonce]);
+        $head->addAsset(AssetType::JSLATE, 'Resources/d3/d3.min.js?v=' . $this->app->version, ['nonce' => $nonce]);
+        $head->addAsset(AssetType::JSLATE, 'Resources/mermaid/mermaid.min.js?v=' . $this->app->version, ['nonce' => $nonce, 'type' => 'module']);
+        $head->addAsset(AssetType::JSLATE, 'Modules/Help/Controller/Controller.js?v=' . self::VERSION, ['nonce' => $nonce, 'type' => 'module']);
     }
 
     /**
@@ -194,6 +196,10 @@ final class BackendController extends Controller
      */
     public function viewHelpModule(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
+        if ($request->getDataString('page') === 'Dev/structure') {
+            return $this->viewHelpModuleER($request, $response, $data);
+        }
+
         $this->loadCodeHighlighting($response);
 
         $active = $this->app->moduleManager->getActiveModules();
@@ -222,6 +228,94 @@ final class BackendController extends Controller
         $view->data['devNavigation'] = $devNavigation;
 
         return $view;
+    }
+
+    public function viewHelpModuleER(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
+    {
+        $active = $this->app->moduleManager->getActiveModules();
+
+        if (!$request->hasData('id') || !isset($active[$request->getData('id')])) {
+            return $this->viewHelpModuleList($request, $response, $data);
+        }
+
+        $this->loadMermaid($response);
+
+        $view = new View($this->app->l11nManager, $request, $response);
+        $view->setTemplate('/Modules/Help/Theme/Backend/help-module');
+
+        $summaryPath    = __DIR__ . '/../../' . $request->getDataString('id') . '/Docs/Help/en/SUMMARY.md';
+        $devSummaryPath = __DIR__ . '/../../' . $request->getDataString('id') . '/Docs/Dev/en/SUMMARY.md';
+
+        $content    = Markdown::parse($this->createERFromMappers($request->getDataString('id') ?? ''));
+        $summary    = \is_file($summaryPath) ? \file_get_contents($summaryPath) : '';
+        $devSummary = \is_file($devSummaryPath) ? \file_get_contents($devSummaryPath) : '';
+
+        $navigation    = Markdown::parse($summary === false ? '' : $summary);
+        $devNavigation = empty($devSummary) ? null : Markdown::parse($devSummary);
+
+        $view->data['content']       = $content;
+        $view->data['navigation']    = $navigation;
+        $view->data['devNavigation'] = $devNavigation;
+
+        return $view;
+    }
+
+    private function createERFromMappers(string $module) : string
+    {
+        $mappers = \scandir(__DIR__ . '/../../../Modules/' . $module . '/Models');
+
+        $toParse = "```mermaid\n";
+        $toParse .= "erDiagram\n";
+
+        $indent = 4;
+
+        foreach ($mappers as $mapper) {
+            if (!\str_ends_with($mapper, 'Mapper.php')) {
+                continue;
+            }
+
+            $class = '\\Modules\\' . $module . '\\Models\\' . \substr($mapper, 0, -4);
+
+            if (!empty($class::MODEL)
+                && \is_file(__DIR__ . '/../../../Modules/' . $module . '/Models/' . \substr($class::MODEL, \strrpos($class::MODEL, '\\') + 1) . 'Mapper.php')
+                && \substr($class::MODEL, \strrpos($class::MODEL, '\\') + 1) !== \substr($mapper, 0, -10)
+            ) {
+                continue;
+            }
+
+            $toParse .= \str_repeat(' ', $indent) . \substr($mapper, 0, -10) . " {\n";
+
+            foreach ($class::COLUMNS as $data) {
+                $toParse .= \str_repeat(' ', $indent + 4) . $data['type'] . ' ' . \str_replace('/', '_', $data['internal']) . "\n";
+            }
+
+            foreach ($class::HAS_MANY as $name => $data) {
+                $toParse .= \str_repeat(' ', $indent + 4) . 'array ' . \str_replace('/', '_', $name) . "\n";
+            }
+
+            $toParse .= \str_repeat(' ', $indent) . "}\n";
+
+            foreach ($class::BELONGS_TO as $name => $data) {
+                $childMapper = \substr($data['mapper'], \strrpos($data['mapper'], '\\') + 1, -6);
+                $toParse .= \str_repeat(' ', $indent) . \substr($mapper, 0, -10) . ' }|--o| ' . $childMapper . " : references\n";
+            }
+
+            foreach ($class::OWNS_ONE as $name => $data) {
+                $childMapper = \substr($data['mapper'], \strrpos($data['mapper'], '\\') + 1, -6);
+                $toParse .= \str_repeat(' ', $indent) . \substr($mapper, 0, -10) . ' }|--o| ' . $childMapper . " : references\n";
+            }
+
+            foreach ($class::HAS_MANY as $name => $data) {
+                $childMapper = \substr($data['mapper'], \strrpos($data['mapper'], '\\') + 1, -6);
+                $toParse .= \str_repeat(' ', $indent) . \substr($mapper, 0, -10) . ' }|--|{ ' . $childMapper . " : references\n";
+            }
+        }
+
+        $toParse .= "\n```\n";
+
+        //echo $toParse;
+
+        return $toParse;
     }
 
     /**

@@ -8,4 +8,4 @@ The target group for this module is everyone.
 
 # Setup
 
-This module doesn't have any additional setup requirements since it is installed during the application install process. This module cannot be uninstalled if it is manually deleted from the hard drive please manually download the module from the page and put it into the `Modules/` directory.
+This module doesn't have any additional setup requirements. This module cannot be uninstalled if it is manually deleted from the hard drive please manually download the module from the page and put it into the `Modules/` directory.

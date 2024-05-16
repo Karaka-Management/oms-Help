@@ -33,7 +33,7 @@ omsApp.Modules.Help = class {
                         svg.html('<g>' + svg.html() + '</g>');
                         const inner = svg.select('g');
                         const zoom = d3.zoom().on('zoom', function(event) {
-                        inner.attr('transform', event.transform);
+                            inner.attr('transform', event.transform);
                         });
                         svg.call(zoom);
                     });

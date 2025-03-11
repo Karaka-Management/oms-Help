@@ -26,7 +26,6 @@ $tableView->baseUri   = 'help/module/list';
 $tableView->exportUri = '{/api}admin/module/list/export?csrf={$CSRF}';
 $tableView->setObjects($modules);
 ?>
-
 <div class="row">
     <div class="col-xs-12">
         <section class="portlet">
